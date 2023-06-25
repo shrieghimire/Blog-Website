@@ -1,9 +1,14 @@
+import { useParams, Link } from "react-router-dom"
 import "./blog.css"
-
 import React from 'react'
 
 const Blog = () => {
+
+  const { id } = useParams();
+  console.log(id);
+
   return (
+    // <div>
     <div className="blog__container">
       <h2 className="blog__header__title">Blog</h2>
       <div className="blog__section">
@@ -18,9 +23,11 @@ const Blog = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit vero aliquam veniam facere libero nihil assumenda earum itaque, vitae dolore explicabo atque tenetur exercitationem nam, quidem ipsam eum ipsum quasi.
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet deleniti consequuntur libero rem, facere blanditiis aliquam laborum voluptas magnam itaque! Enim deserunt facilis voluptate similique rerum eligendi exercitationem nam in.
         </div>
-
       </div>
+      <Link to="/" element="/home" className="go__home">Home</Link>
     </div>
+    // </div>
+
   )
 }
 
