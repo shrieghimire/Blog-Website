@@ -23,4 +23,11 @@
     cursor: pointer;
     font-weight: 900;
     color: tomato;
+    text-decoration: none;
+}
+
+.main__page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
