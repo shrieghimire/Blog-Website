@@ -1,27 +1,38 @@
-import React from 'react'
-import { Header } from "../header/header"
-import "./homepage.css"
-import Footer from '../footer/footer'
-import { Link, useParams } from 'react-router-dom'
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import BlogCard from "../blog/blog";
 const Homepage = () => {
-  const { id } = useParams();
-  console.log(id);
+  const [blogs, setBlogs] = useState([]);
+  //get blogs
+  const getAllBlogs = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/blog/all-blog"
+      );
+      if (data?.success) {
+        setBlogs(data?.blogs);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getAllBlogs();
+  }, []);
   return (
-    <div className='main__page'>
-      <Header />
-      <div className="sectionInner">
-        <div className="blog-content">
-          <div className="blog-title">Blog Title</div>
-          <div className="blog-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque qui ipsam ipsum nam quam porro repellendus aliquid dolor cum aliquam eligendi adipisci, officia quaerat sapiente, esse tempore? Commodi, repudiandae ducimus?
-            <br></br><Link to="/blog" className="textAlert">See More</Link>
-          </div>
-        </div>
-      </div>
-      <Footer />
+    <div>
+      {blogs &&
+        blogs.map((blog) => (
+          <BlogCard
+            id={blog?._id}
+            author={blog?.author}
+            title={blog?.title}
+            description={blog?.description}
+            time={blog.createdAt}
+          />
+        ))}
     </div>
-  )
-}
+  );
+};
 
-export default Homepage
+export default Homepage;
