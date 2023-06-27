@@ -1,33 +1,35 @@
 .blog-content {
-    margin-top: 1.75rem;
-    display: flex;
-    flex-direction: column;
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .blog-title {
-    font-size: 1.255rem;
-    font-weight: 700;
+  font-size: 1.255rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .blog-description {
-    margin: 0.255rem 0 0 0;
-    text-align: justify;
+  margin: 0.255rem 0 0 0;
+  text-align: justify;
+  font-size: medium;
 }
 
 .sectionInner {
-    max-width: 45rem;
-    margin: auto;
+  max-width: 45rem;
+  margin: auto;
 }
 
 .textAlert {
-    cursor: pointer;
-    font-weight: 900;
-    color: tomato;
-    text-decoration: none;
+  cursor: pointer;
+  font-weight: 900;
+  color: tomato;
+  text-decoration: none;
 }
 
 .main__page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

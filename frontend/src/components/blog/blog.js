@@ -1,34 +1,88 @@
-import { useParams, Link } from "react-router-dom"
-import "./blog.css"
-import React from 'react'
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Blog = () => {
+export default function BlogCard({ author, title, description, time, id }) {
+  const navigate = useNavigate();
+  const handleEdit = () => {
+    navigate(`/blog-detail/${id}`);
+  };
 
-  const { id } = useParams();
-  console.log(id);
+  const handleDelete = async () => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:8000/api/blog/delete-blog/${id}`
+      );
+      if (data?.success) {
+        alert("Blog Deleted");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(
+      date
+    );
+    const day = date.getDate();
+    return `${month} ${day}, ${year}`;
+  };
 
+  const dateString = `${time}`;
+  const formattedDate = formatDate(dateString);
   return (
-    // <div>
-    <div className="blog__container">
-      <h2 className="blog__header__title">Blog</h2>
-      <div className="blog__section">
-        <div className="blog__header__section">
-          <div className="blog__title">Blog Title</div>
-          <div className="divider"></div>
-          <div className="blog__writer-name test">Binaya Khadka</div>
-          <div className="blog__date test">Jun 25, 2023</div>
-        </div>
-        <div className="blog__text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore quam velit sint iusto tenetur neque aliquam, magnam ratione culpa fugit atque distinctio veritatis molestiae! Unde aliquid blanditiis temporibus quis neque.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit vero aliquam veniam facere libero nihil assumenda earum itaque, vitae dolore explicabo atque tenetur exercitationem nam, quidem ipsam eum ipsum quasi.
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet deleniti consequuntur libero rem, facere blanditiis aliquam laborum voluptas magnam itaque! Enim deserunt facilis voluptate similique rerum eligendi exercitationem nam in.
-        </div>
-      </div>
-      <Link to="/" element="/home" className="go__home">Home</Link>
-    </div>
-    // </div>
-
-  )
+    <Card
+      sx={{
+        width: "70%",
+        margin: "auto",
+        mt: 2,
+        padding: 2,
+        boxShadow: "5px 5px 10px #ccc",
+        "&:hover": {
+          boxShadow: "20px 20px 50px #ccc",
+        },
+      }}
+    >
+      <Box display={"flex"}>
+        <IconButton onClick={handleEdit} sx={{ marginLeft: "auto" }}>
+          <ModeEditIcon color="info" />
+        </IconButton>
+        <IconButton onClick={handleDelete}>
+          <DeleteIcon color="error" />
+        </IconButton>
+      </Box>
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"></Avatar>
+        }
+        title={author}
+        subheader={formattedDate}
+      />
+      <CardContent>
+        <Typography variant="h6" color="text" textAlign={"justify"}>
+          {title}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          textAlign={"justify"}
+        >
+          <br />
+          {description}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
-
-export default Blog

@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema(
   {
+    author: {
+      type: String,
+      require: [true, "author is required"],
+    },
     title: {
       type: String,
       require: [true, "title is required"],

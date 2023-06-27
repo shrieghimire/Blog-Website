@@ -1,3 +1,8 @@
 .footer-section {
-    margin-top: auto;
+  margin-top: auto;
+  position: static;
+  bottom: 0;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: smaller;
 }
