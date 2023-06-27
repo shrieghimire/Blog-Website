@@ -29,15 +29,15 @@ exports.getAllBlogsController = async (req, res) => {
 //Create Blog
 exports.createBlogController = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { author, title, description } = req.body;
     //validation
-    if (!title || !description) {
+    if (!author || !title || !description) {
       return res.status(400).send({
         success: false,
         message: "Please Provide ALl Fields",
       });
     }
-    const newBlog = new blogModel({ title, description });
+    const newBlog = new blogModel({ author, title, description });
     await newBlog.save();
     return res.status(201).send({
       success: true,
@@ -58,7 +58,7 @@ exports.createBlogController = async (req, res) => {
 exports.updateBlogController = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description } = req.body;
+    const { author, title, description } = req.body;
     const blog = await blogModel.findByIdAndUpdate(
       id,
       { ...req.body },
