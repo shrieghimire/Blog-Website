@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./components/homepage/homepage";
-import Blog from "./components/blog/blog";
 import { pageContainer } from "./preset-styles";
 import Header from "./components/header/Header";
 import CreateBlog from "./pages/CreateBlog";
+import BlogDetails from "./pages/BlogDetails";
 // import Footer from "./components/footer/footer";
 
 export default function App() {
@@ -13,9 +13,8 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/blogs" element={<Homepage />} />
           <Route path="/create-blog" element={<CreateBlog />} />
-          <Route path="/blog/:id" element={<Blog />} />
+          <Route path="/blog-detail/:id" element={<BlogDetails />} />
         </Routes>
       </div>
       {/* <Footer /> */}

@@ -14,7 +14,7 @@ import axios from "axios";
 export default function BlogCard({ author, title, description, time, id }) {
   const navigate = useNavigate();
   const handleEdit = () => {
-    navigate(`http://localhost:8000/api/blog/update-blog/${id}`);
+    navigate(`/blog-detail/${id}`);
   };
 
   const handleDelete = async () => {
@@ -71,10 +71,14 @@ export default function BlogCard({ author, title, description, time, id }) {
         subheader={formattedDate}
       />
       <CardContent>
-        <Typography variant="h6" color="text.secondary">
+        <Typography variant="h6" color="text" textAlign={"justify"}>
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          textAlign={"justify"}
+        >
           <br />
           {description}
         </Typography>

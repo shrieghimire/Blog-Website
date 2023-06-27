@@ -11,7 +11,7 @@ export default function Header() {
             <Button
               sx={{ margin: 1, color: "white" }}
               LinkComponent={Link}
-              to="/blogs"
+              to="/"
             >
               Home
             </Button>
