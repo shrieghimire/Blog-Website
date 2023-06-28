@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./components/homepage/homepage";
 import { pageContainer } from "./preset-styles";
-import Header from "./components/header/Header";
+import Header from "./components/header/header";
 import CreateBlog from "./pages/CreateBlog";
 import BlogDetails from "./pages/BlogDetails";
 // import Footer from "./components/footer/footer";

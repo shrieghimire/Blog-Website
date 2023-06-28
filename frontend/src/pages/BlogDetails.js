@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
+import { BASE_URL } from "../services/helper";
+
 const BlogDetails = () => {
   const [blog, setBlog] = useState({});
   const id = useParams().id;
@@ -10,9 +12,7 @@ const BlogDetails = () => {
   // get blog details
   const getBlogDetail = useCallback(async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/blog/get-blog/${id}`
-      );
+      const { data } = await axios.get(`${BASE_URL}/api/blog/get-blog/${id}`);
       if (data?.success) {
         setBlog(data?.blog);
         setInputs({
@@ -42,7 +42,7 @@ const BlogDetails = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        `http://localhost:8000/api/blog/update-blog/${id}`,
+        `${BASE_URL}/api/blog/update-blog/${id}`,
         {
           author: inputs.author,
           title: inputs.title,

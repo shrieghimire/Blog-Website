@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
+import { BASE_URL } from "../services/helper";
 const CreateBlog = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
@@ -20,14 +21,11 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:8000/api/blog/create-blog",
-        {
-          author: inputs.author,
-          title: inputs.title,
-          description: inputs.description,
-        }
-      );
+      const { data } = await axios.post(`${BASE_URL}/api/blog/create-blog`, {
+        author: inputs.author,
+        title: inputs.title,
+        description: inputs.description,
+      });
       if (data?.success) {
         alert("Blog Created");
         navigate("/");
