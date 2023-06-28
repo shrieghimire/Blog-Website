@@ -8,9 +8,8 @@ dotenv.config();
 const blogRoutes = require("./routes/blogRoutes");
 
 //mongodb connection
-const USERNAME = process.env.DB_USERNAME;
-const PASSWORD = process.env.DB_PASSWORD;
-Connection(USERNAME, PASSWORD);
+const URL = process.env.DB_URL;
+Connection(URL);
 
 //rest objecct
 const app = express();
